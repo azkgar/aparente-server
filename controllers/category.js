@@ -93,7 +93,7 @@ function deleteCategory(req,res) {
 
 function uploadCover(req,res) {
     const params = req.params;
-    
+
     Category.findById({_id:params.id}, (err, categoryData) => {
         if(err){
             res.status(500).send({message: "Error del servidor"});
@@ -102,7 +102,7 @@ function uploadCover(req,res) {
                 res.status(404).send({message: "Categoría no encontrada"});
             } else {
                 let category = categoryData;
-                
+
                 if(req.files) {
                     let filePath = req.files.avatar.path;
                     let fileSplit = filePath.split("/");
@@ -148,14 +148,14 @@ function getCover(req,res) {
 }
 
 function getCategory(req, res) {
-    const {tag} = req.params;
+    const {url} = req.params;
 
-    Category.find({ "tag" : tag}).exec((err, result) => {
+    Category.find({ "url" : url}).exec((err, result) => {
         if(err) {
             res.status(500).send({message: "Error del servidor"});
         } else {
             if(!result) {
-                res.status(404).send({message: "No se encontró ningún menú"});
+                res.status(404).send({message: "No se encontró la categoría"});
             } else {
                 res.status(200).send({category: result});
             }
