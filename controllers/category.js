@@ -148,9 +148,9 @@ function getCover(req,res) {
 }
 
 function getCategory(req, res) {
-    const {tag} = req.params;
+    const {url} = req.params;
 
-    Category.find({ "tag" : tag}).exec((err, result) => {
+    Category.find({ "url" : url}).exec((err, result) => {
         if(err) {
             res.status(500).send({message: "Error del servidor"});
         } else {
